@@ -1,4 +1,4 @@
-.App {
+/* .App {
   padding: 30px;
   display: flex;
 }
@@ -21,16 +21,16 @@
 /*  width: 20px;*/
 /*  height: auto;*/
 /*}*/
-
+/* 
 .active-filter {
   background-color: cadetblue;
-}
+} */
 
 .is-done {
   opacity: 0.5;
 }
-
+/* 
 .error {
   border: 2px solid red;
   outline: none;
-}
+} */ 
