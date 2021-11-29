@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./TodoList";
 import { v1 } from "uuid";
 import AddItemForm from "./AddItemForm";
-import { AppBar, Toolbar, IconButton, Typography, Button, Container, Grid } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Button, Container, Grid, Paper } from '@material-ui/core';
 import { Menu } from "@material-ui/icons";
 
 export type TaskType = {
@@ -36,7 +36,7 @@ function App() {
         [todoListID_1]: [
             { id: v1(), title: 'HTML', isDone: true },
             { id: v1(), title: 'CSS', isDone: true },
-            // {id: v1(), title: 'JS, REACT', isDone: false},
+            {id: v1(), title: 'JS, REACT', isDone: false},
             { id: v1(), title: 'Redux', isDone: false },
         ],
         [todoListID_2]: [
@@ -111,20 +111,23 @@ function App() {
         }
 
         return (
-            <TodoList
-                key={tl.id}
-                id={tl.id}
-                filter={tl.filter}
-                title={tl.title}
-                tasks={tasksForRender}
-                addTask={addTask}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-                removeTodoList={removeTodoList}
-                changeTaskStatus={changeTaskStatus}
-                changeTaskTitle={changeTaskTitle}
-                changeTodoListTitle={changeTodoListTitle}
-            />
+            <Grid item key={tl.id}>
+                <Paper elevation={6} style={{padding: "10px"}}>
+                    <TodoList
+                        id={tl.id}
+                        filter={tl.filter}
+                        title={tl.title}
+                        tasks={tasksForRender}
+                        addTask={addTask}
+                        removeTask={removeTask}
+                        changeFilter={changeFilter}
+                        removeTodoList={removeTodoList}
+                        changeTaskStatus={changeTaskStatus}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodoListTitle={changeTodoListTitle}
+                    />
+                </Paper>
+            </Grid>
         )
     })
     return (
@@ -135,7 +138,7 @@ function App() {
                         <Menu>
                         </Menu>
                     </IconButton>
-                    <Typography variant={"h6"}>
+                    <Typography variant={"h6"} >
                         Todolists
                     </Typography>
                     <Button color={"inherit"}>Login</Button>
@@ -145,7 +148,7 @@ function App() {
                 <Grid container style={{padding: "15px 0"}}>
                     <AddItemForm addItem={addTodoList} />
                 </Grid>
-                <Grid container>
+                <Grid container spacing={4}>
                     {todoListsComponents}
                 </Grid>
             </Container>

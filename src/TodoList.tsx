@@ -67,7 +67,7 @@ const TodoList = (props: TodoListPropsType) => {
 
     return (
         <div className="todoList">
-            <Typography variant={"h6"} style={{fontWeight: "bold"}}>
+            <Typography variant={"h6"} align={"center"} style={{fontWeight: "bold"}}>
                 <EditableSpan title={props.title} setNewTitle={changeTodoListTitle}/>
                 <IconButton onClick={()=>props.removeTodoList(props.id)}>
                     <Delete/>
@@ -77,23 +77,19 @@ const TodoList = (props: TodoListPropsType) => {
             <List>
                 {jsxTaskElements}
             </List>
-            <div>
-                <ButtonGroup
-                    variant={"contained"}
-                    size={"small"}
-                    disableElevation
-
-                >
+            <div style={{display: "flex", justifyContent: "space-between"}}>
                     <Button
+                        variant={"contained"} size={"small"} disableElevation
                         color={props.filter === "all" ? "secondary" : "primary"}
                         onClick={setAll}>All</Button>
                     <Button
+                        variant={"contained"} size={"small"} disableElevation
                         color={props.filter === "active" ? "secondary" : "primary"}
                         onClick={setActive}>Active</Button>
                     <Button
+                        variant={"contained"} size={"small"} disableElevation
                         color={props.filter === "completed" ? "secondary" : "primary"}
                         onClick={setCompleted}>Completed</Button>
-                </ButtonGroup>
             </div>
         </div>
     )
