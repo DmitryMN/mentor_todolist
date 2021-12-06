@@ -34,7 +34,7 @@ test("correct todolist add", () => {
     expect(result[2].title).toBe(addTitle);
 });
 
-test("correct change TodoListTitle ", () => {
+test("correct change todolist title ", () => {
     // data
     const todoListID_1 = v1()
     const todoListID_2 = v1()

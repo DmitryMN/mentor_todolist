@@ -1,4 +1,3 @@
-import { type } from "os";
 import { v1 } from "uuid";
 import { TodoListType, FilterValuesType } from "../App"
 
@@ -17,7 +16,7 @@ export const todoListsReducer = (todoLists: Array<TodoListType>,  action: AllACT
         case "ADD_TODOLIST":
             const todoListID = v1()
             const newTodoList: TodoListType = {
-                id: v1(),
+                id: todoListID,
                 title: action.title,
                 filter: "all"
             }
@@ -43,5 +42,5 @@ export const changeTodoListTitleAC = (title: string, id: string) => {
 }
 
 export const changeFilterAC = (id: string, filter: FilterValuesType) => {
-    return {type: "CHANGE_FILTER" as const, id: id, filter: filter } as const
+    return {type: "CHANGE_FILTER", id: id, filter: filter } as const
 }
