@@ -3,7 +3,6 @@ import { TodoListType, FilterValuesType } from "../App";
 import { todoListsReducer, removeTodoListAC, addTodoListAC, changeTodoListTitleAC, changeFilterAC } from "./reducerTodoLists";
 
 
-
 test("correct todolist removed", () => {
     // data
     const todoListID_1 = v1()
@@ -65,3 +64,5 @@ test("correct change filter", () => {
     expect(result[1].filter).toBe(newFilter);
 
 });
+
+
