@@ -14,22 +14,22 @@ const AddItemForm = (props: AddItemFormPropsType) => {
     const [error, setError] = useState<boolean>(false)
 
     const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-        setError(false)
-        setTitle(event.currentTarget.value)
+        setError(false);
+        setTitle(event.currentTarget.value);
     }
     const addItem = () => {
         const trimmedTitle = title.trim()
         if(trimmedTitle){
             props.addItem(trimmedTitle)
         } else {
-            setError(true)
+            setError(true);
 
         }
-        setTitle("")
+        setTitle("");
     }
     const onKeyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter") {
-            addItem()
+            addItem();
         }}
 
 
@@ -46,13 +46,6 @@ const AddItemForm = (props: AddItemFormPropsType) => {
                 error={error}
                 helperText={errorMessage}
             />
-            {/*<input*/}
-            {/*    style={error ? errorInputStyles : undefined}*/}
-            {/*    value={title}*/}
-            {/*    placeholder='Enter title...'*/}
-            {/*    onChange={changeTitle}*/}
-            {/*    onKeyPress={onKeyPressAddTask}*/}
-            {/*/>*/}
             <IconButton onClick={addItem}
                         color={"primary"}
                         size={"small"}

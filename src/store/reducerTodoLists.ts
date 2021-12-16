@@ -2,7 +2,7 @@ import { v1 } from "uuid";
 import { TodoListType, FilterValuesType } from "../App"
 
 
-type RemoveTodoListACType = ReturnType<typeof removeTodoListAC>
+export type RemoveTodoListACType = ReturnType<typeof removeTodoListAC>
 export type AddTodoListACType = ReturnType<typeof addTodoListAC>;
 type ChangeTodoListTitleACType = ReturnType<typeof changeTodoListTitleAC >;
 type ChangeFilterACType = ReturnType<typeof changeFilterAC>;
