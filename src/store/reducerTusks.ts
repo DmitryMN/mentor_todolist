@@ -32,7 +32,7 @@ export const tasksReducer = (state: TasksStateType, action: AllACTypes ) => {
             delete state[action.todoListId];
             return {...state};
         default:
-            return  state;
+            return state;
     }
 }
 

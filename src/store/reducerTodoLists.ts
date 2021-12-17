@@ -9,7 +9,15 @@ type ChangeFilterACType = ReturnType<typeof changeFilterAC>;
 
 type AllACTypes = AddTodoListACType | RemoveTodoListACType | ChangeTodoListTitleACType | ChangeFilterACType ;
 
-export const todoListsReducer = (todoLists: Array<TodoListType>,  action: AllACTypes ): Array<TodoListType> => {
+export const todoListID_1 = v1()
+export const todoListID_2 = v1()
+
+const initialState: Array<TodoListType> = [
+    { id: todoListID_1, title: "What to learn", filter: "all" },
+    { id: todoListID_2, title: "What to buy", filter: "all" }
+]
+
+export const todoListsReducer = (todoLists: Array<TodoListType> = initialState,  action: AllACTypes ): Array<TodoListType> => {
     switch(action.type) {
         case "REMOVE_TODOLIST":
             return todoLists.filter(tl => tl.id !== action.todoListId);
@@ -24,7 +32,8 @@ export const todoListsReducer = (todoLists: Array<TodoListType>,  action: AllACT
             return todoLists.map(tl => tl.id === action.id ? { ...tl, title: action.title } : tl)       
         case "CHANGE_FILTER":
             return todoLists.map(tl => tl.id === action.id ? { ...tl,  filter: action.filter} : tl);
-        default: return todoLists
+        default: 
+            return todoLists;
     }
 }
 
