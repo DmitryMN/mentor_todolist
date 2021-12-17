@@ -1,6 +1,6 @@
 import {TaskType, TasksStateType} from "../App";
 import {v1} from "uuid";
-import {AddTodoListACType, RemoveTodoListACType} from "./reducerTodoLists";
+import {AddTodoListACType, RemoveTodoListACType, todoListID_1, todoListID_2} from "./reducerTodoLists";
 
 type RemoveTaskACType = ReturnType<typeof removeTaskAC>;
 type ChangeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>;
@@ -10,7 +10,23 @@ type ChangeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>;
 
 type AllACTypes = RemoveTaskACType | ChangeTaskTitleACType | AddTaskACType | ChangeTaskStatusACType | AddTodoListACType | RemoveTodoListACType;
 
-export const tasksReducer = (state: TasksStateType, action: AllACTypes ) => {
+const initialState: TasksStateType = {
+
+    [todoListID_1]: [
+        { id: v1(), title: 'HTML', isDone: true },
+        { id: v1(), title: 'CSS', isDone: true },
+        {id: v1(), title: 'JS, REACT', isDone: false},
+        { id: v1(), title: 'Redux', isDone: false },
+    ],
+    [todoListID_2]: [
+        { id: v1(), title: 'Meat', isDone: true },
+        { id: v1(), title: 'Beer', isDone: true },
+        { id: v1(), title: 'Milk', isDone: false },
+        { id: v1(), title: 'Bread', isDone: false },
+    ],
+}
+
+export const tasksReducer = (state: TasksStateType = initialState, action: AllACTypes ): TasksStateType => {
     switch (action.type) {
         case "REMOVE_TASK":
             return { ...state, [action.todoListId]: state[action.todoListId].filter(task => task.id !== action.id)};
