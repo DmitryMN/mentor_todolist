@@ -1,9 +1,10 @@
-import React, {ChangeEvent, KeyboardEvent,  useState} from "react";
+import React, {ChangeEvent, KeyboardEvent,  useCallback,  useState} from "react";
 import {FilterValuesType, TaskType} from "./App";
 import AddItemForm from "./AddItemForm";
 import EditableSpan from "./EditableSpan";
 import {Button, ButtonGroup, Checkbox, IconButton, List, ListItem, Typography} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import { title } from "process";
 
 type TodoListPropsType = {
     id: string
@@ -51,10 +52,10 @@ const TodoList = (props: TodoListPropsType) => {
             </ListItem>)
     })
 
-    const addTask = (title: string) => {
+    const addTask =  useCallback((title: string) => {
             props.addTask(title, props.id)
-    }
-    console.dir(addTask)
+    }, [props.addTask, props.id]);
+
     const setAll = () => props.changeFilter('all', props.id)
     const setActive = () => props.changeFilter('active', props.id)
     const setCompleted = () => props.changeFilter('completed', props.id)

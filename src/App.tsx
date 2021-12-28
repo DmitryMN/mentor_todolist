@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 import { v1 } from "uuid";
@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "./store/store";
 import {removeTodoListAC, addTodoListAC, changeFilterAC, changeTodoListTitleAC} from "./store/reducerTodoLists";
 import {removeTaskAC, changeTaskStatusAC, addTaskAC, changeTaskTitleAC} from "./store/reducerTusks";
+import { title } from 'process';
 
 export type TaskType = {
     id: string
@@ -103,7 +104,7 @@ function App() {
         //delete tasks[todoListID]
         dispatch(removeTodoListAC(todoListID));
     }
-    const addTodoList = (title: string) => {
+    const addTodoList = useCallback((title: string) => {
         // const todoListID = v1()
         // const newTodoList: TodoListType = {
         //     id: todoListID,
@@ -113,7 +114,7 @@ function App() {
         // setTodoLists([...todoLists, newTodoList])
         // setTasks({ ...tasks, [todoListID]: [] })
         dispatch(addTodoListAC(title));
-    }
+    }, [dispatch]);
 
 
     // UI:
