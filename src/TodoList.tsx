@@ -23,8 +23,6 @@ type TodoListPropsType = {
 
 const TodoList = React.memo((props: TodoListPropsType) => {
 
-
-
     // const jsxTaskElements = props.tasks.map(task => {
     //     const removeTask = () => props.removeTask(task.id, props.id)
     //     const changeStatus = (e: ChangeEvent<HTMLInputElement>)=>
@@ -56,6 +54,10 @@ const TodoList = React.memo((props: TodoListPropsType) => {
     //         </ListItem>)
     // })
 
+    const removeTask = useCallback((taskId: string, toDolistId: string) => props.removeTask(taskId, toDolistId), [props.removeTask]);
+    const changeTaskStatus = useCallback((taskId: string, checked: boolean, toDoListId: string) => props.changeTaskStatus(taskId, checked, toDoListId), [props.changeTaskStatus]);
+    const changeTitle = useCallback((taskId: string, title: string, toDoListId: string) => props.changeTaskTitle(taskId, title, toDoListId), [props.changeTaskTitle]);
+
     const addTask =  useCallback((title: string) => {
             props.addTask(title, props.id)
     }, [props.addTask, props.id]);
@@ -80,7 +82,7 @@ const TodoList = React.memo((props: TodoListPropsType) => {
             </Typography>
             <AddItemForm addItem={addTask} />
             <List>
-                { props.tasks.map(task => <Task id={props.id} task={task} />) }
+                { props.tasks.map(task => <Task key={task.id} id={props.id} task={task} removeTask={removeTask} changeTaskStatus={changeTaskStatus} changeTitle={changeTitle}/>) }
             </List>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                     <Button

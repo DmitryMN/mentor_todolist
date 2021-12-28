@@ -15,7 +15,7 @@ const initialState: TasksStateType = {
     [todoListID_1]: [
         { id: v1(), title: 'HTML', isDone: true },
         { id: v1(), title: 'CSS', isDone: true },
-        {id: v1(), title: 'JS, REACT', isDone: false},
+        {id: v1(), title: 'REACT', isDone: false},
         { id: v1(), title: 'Redux', isDone: false },
     ],
     [todoListID_2]: [
