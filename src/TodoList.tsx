@@ -5,6 +5,7 @@ import EditableSpan from "./EditableSpan";
 import {Button, ButtonGroup, Checkbox, IconButton, List, ListItem, Typography} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import { title } from "process";
+import Task from "./Task";
 
 type TodoListPropsType = {
     id: string
@@ -20,37 +21,40 @@ type TodoListPropsType = {
     changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
-const TodoList = (props: TodoListPropsType) => {
+const TodoList = React.memo((props: TodoListPropsType) => {
 
-    const jsxTaskElements = props.tasks.map(task => {
-        const removeTask = () => props.removeTask(task.id, props.id)
-        const changeStatus = (e: ChangeEvent<HTMLInputElement>)=>
-                props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
-        const changeTitle = (title: string)=>
-            props.changeTaskTitle(task.id, title, props.id)
-        return (
-            <ListItem
-                disableGutters
-                className={task.isDone ? "is-done" : ""}
-                divider
-                key={task.id}
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "0px"
-                }}
-            >
-                <Checkbox
-                    color={"primary"}
-                    onChange={changeStatus}
-                    checked={task.isDone}
-                />
-                <EditableSpan title={task.title} setNewTitle={changeTitle}/>
-                <IconButton onClick={removeTask}>
-                    <Delete fontSize={"small"}/>
-                </IconButton>
-            </ListItem>)
-    })
+
+
+    // const jsxTaskElements = props.tasks.map(task => {
+    //     const removeTask = () => props.removeTask(task.id, props.id)
+    //     const changeStatus = (e: ChangeEvent<HTMLInputElement>)=>
+    //             props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
+    //     const changeTitle = (title: string)=>
+    //         props.changeTaskTitle(task.id, title, props.id);
+
+    //     return (
+    //         <ListItem
+    //             disableGutters
+    //             className={task.isDone ? "is-done" : ""}
+    //             divider
+    //             key={task.id}
+    //             style={{
+    //                 display: "flex",
+    //                 justifyContent: "space-between",
+    //                 padding: "0px"
+    //             }}
+    //         >
+    //             <Checkbox
+    //                 color={"primary"}
+    //                 onChange={changeStatus}
+    //                 checked={task.isDone}
+    //             />
+    //             <EditableSpan title={task.title} setNewTitle={changeTitle}/>
+    //             <IconButton onClick={removeTask}>
+    //                 <Delete fontSize={"small"}/>
+    //             </IconButton>
+    //         </ListItem>)
+    // })
 
     const addTask =  useCallback((title: string) => {
             props.addTask(title, props.id)
@@ -76,7 +80,7 @@ const TodoList = (props: TodoListPropsType) => {
             </Typography>
             <AddItemForm addItem={addTask} />
             <List>
-                {jsxTaskElements}
+                { props.tasks.map(task => <Task id={props.id} task={task} />) }
             </List>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                     <Button
@@ -94,6 +98,6 @@ const TodoList = (props: TodoListPropsType) => {
             </div>
         </div>
     )
-}
+});
 
 export default TodoList;

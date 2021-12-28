@@ -57,14 +57,15 @@ function App() {
     //     ],
     // })
 
-    const removeTask = (taskID: string, todoListID: string) => {
+    const removeTask = useCallback((taskID: string, todoListID: string) => {
         // setTasks({
         //     ...tasks,
         //     [todoListID]: tasks[todoListID].filter(task => task.id !== taskID)
         // })
         dispatch(removeTaskAC(taskID, todoListID));
-    }
-    const addTask = (title: string, todoListID: string) => {
+    }, [dispatch]);
+
+    const addTask = useCallback((title: string, todoListID: string) => {
         // const newTask: TaskType = {
         //     id: v1(),
         //     title: title,
@@ -75,35 +76,40 @@ function App() {
         //     [todoListID]: [newTask, ...tasks[todoListID]]
         // })
         dispatch(addTaskAC(title, todoListID));
-    }
-    const changeTaskStatus = (taskID: string, isDone: boolean, todoListID: string) => {
+    }, [dispatch]);
+
+    const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todoListID: string) => {
         // setTasks({
         //     ...tasks,
         //     [todoListID]: tasks[todoListID].map(t => t.id === taskID ? { ...t, isDone } : t)
         // })
         dispatch(changeTaskStatusAC(taskID, isDone, todoListID));
-    }
-    const changeTaskTitle = (taskID: string, title: string, todoListID: string) => {
+    }, [dispatch]);
+
+    const changeTaskTitle = useCallback((taskID: string, title: string, todoListID: string) => {
         // setTasks({
         //     ...tasks,
         //     [todoListID]: tasks[todoListID].map(t => t.id === taskID ? { ...t, title } : t)
         // })
         dispatch(changeTaskTitleAC(taskID, title, todoListID));
-    }
+    }, [dispatch]);
 
-    const changeFilter = (filter: FilterValuesType, todoListID: string) => {
+    const changeFilter = useCallback((filter: FilterValuesType, todoListID: string) => {
         // setTodoLists(todoLists.map(tl => tl.id === todoListID ? { ...tl, filter } : tl))
         dispatch(changeFilterAC(todoListID, filter));
-    }
-    const changeTodoListTitle = (title: string, todoListID: string) => {
+    }, [dispatch]);
+
+    const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
         // setTodoLists(todoLists.map(tl => tl.id === todoListID ? { ...tl, title } : tl))
         dispatch(changeTodoListTitleAC(title, todoListID));
-    }
-    const removeTodoList = (todoListID: string) => {
+    }, [dispatch]);
+
+    const removeTodoList = useCallback((todoListID: string) => {
         //setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
         //delete tasks[todoListID]
         dispatch(removeTodoListAC(todoListID));
-    }
+    }, [dispatch]);
+
     const addTodoList = useCallback((title: string) => {
         // const todoListID = v1()
         // const newTodoList: TodoListType = {

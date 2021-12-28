@@ -7,7 +7,7 @@ type AddItemFormPropsType = {
 }
 
 const AddItemForm = React.memo((props: AddItemFormPropsType) => {
-    console.log("AddItemForm");
+
     const errorMsgStyles = { backgroundColor: "red", color: "white", fontWeight: 900 }
     const errorInputStyles = { border: "2px solid red", outline: "none" }
 
