@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import { Checkbox, IconButton, ListItem } from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {TaskType} from "./App";
@@ -20,9 +20,9 @@ const Task = React.memo((props: TaskPropsType) => {
 
     const changeStatus = (e: ChangeEvent<HTMLInputElement>)=>
             props.changeTaskStatus(props.task.id, e.currentTarget.checked, props.id);
-    const changeTitle = (title: string)=>
-        props.changeTitle(props.task.id, title, props.id);
 
+    const changeTitle = useCallback((title: string)=>
+        props.changeTitle(props.task.id, title, props.id), [props.changeTitle, props.id]);
 
     return (
         <ListItem
