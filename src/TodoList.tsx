@@ -65,7 +65,7 @@ const TodoList = React.memo((props: TodoListPropsType) => {
     const setAll = () => props.changeFilter('all', props.id)
     const setActive = () => props.changeFilter('active', props.id)
     const setCompleted = () => props.changeFilter('completed', props.id)
-    const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.id)
+    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(title, props.id), [props.changeTodoListTitle, props.id]);
 
 
     const allBtnClass = props.filter === "all" ? "active-filter" : ""
