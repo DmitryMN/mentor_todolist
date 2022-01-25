@@ -1,61 +1,51 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {IconButton, TextField} from "@material-ui/core";
-import {AddBox} from "@material-ui/icons";
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import { AddBox } from '@mui/icons-material';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
+    console.log('AddItemForm called')
 
-    const errorMsgStyles = { backgroundColor: "red", color: "white", fontWeight: 900 }
-    const errorInputStyles = { border: "2px solid red", outline: "none" }
+    let [title, setTitle] = useState('')
+    let [error, setError] = useState<string | null>(null)
 
-    const [title, setTitle] = useState<string>("")
-    const [error, setError] = useState<boolean>(false)
-
-    const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
-        setTitle(event.currentTarget.value);
-    }
     const addItem = () => {
-        const trimmedTitle = title.trim()
-        if(trimmedTitle){
-            props.addItem(trimmedTitle)
+        if (title.trim() !== '') {
+            props.addItem(title);
+            setTitle('');
         } else {
-            setError(true);
-
+            setError('Title is required');
         }
-        setTitle("");
     }
-    const onKeyPressAddTask = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === "Enter") {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+    }
+
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (error !== null) {
+            setError(null);
+        }
+        if (e.charCode === 13) {
             addItem();
-        }}
+        }
+    }
 
-
-    const errorMessage = error && <div style={errorMsgStyles}>Title is required!</div>
-    return (
-        <div>
-            <TextField
-                size={"small"}
-                variant={"outlined"}
-                value={title}
-                onChange={changeTitle}
-                onKeyPress={onKeyPressAddTask}
-                label={"Title"}
-                error={error}
-                helperText={errorMessage}
-            />
-            <IconButton onClick={addItem}
-                        color={"primary"}
-                        size={"small"}
-            >
-                <AddBox fontSize={"large"}/>
-            </IconButton>
-
-            {/*{errorMessage}*/}
-        </div>
-    )
+    return <div>
+        <TextField variant="outlined"
+                   error={!!error}
+                   value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   label="Title"
+                   helperText={error}
+        />
+        <IconButton color="primary" onClick={addItem}>
+            <AddBox/>
+        </IconButton>
+    </div>
 })
-export default AddItemForm;

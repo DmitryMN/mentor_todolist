@@ -1,4 +1,5 @@
-/* .App {
+/*
+.App {
   padding: 30px;
   display: flex;
 }
@@ -7,30 +8,19 @@
   margin-right: 50px;
 }
 
-/*.todoList {*/
-/*  border: 1px darkslategray solid;*/
-/*  border-radius: 5px;*/
-/*  padding: 20px;*/
-/*}*/
+.error {
+  border: red 1px solid;
+}
 
-/*.todoList button {*/
-/*  margin: 2px;*/
-/*}*/
+.error-message {
+  color: red;
+}
 
-/*.todoList img {*/
-/*  width: 20px;*/
-/*  height: auto;*/
-/*}*/
-/* 
 .active-filter {
-  background-color: cadetblue;
-} */
+  background-color: aquamarine;
+}
 
 .is-done {
   opacity: 0.5;
 }
-/* 
-.error {
-  border: 2px solid red;
-  outline: none;
-} */ 
+*/
