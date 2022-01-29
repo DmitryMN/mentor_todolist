@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
-        'API-KEY': 'a8d9924c-0a09-4a81-9c01-6763bfe8005'
+        'API-KEY': 'a8d9924c-0a09-4a81-9c01-6763abfe8005'
     }
 })
 
@@ -17,6 +17,7 @@ export const todolistsAPI = {
         return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TodolistType }>>>('todo-lists', {title});
     },
     deleteTodolist(id: string) {
+        debugger;
         return instance.delete<ResponseType>(`todo-lists/${id}`);
     },
     updateTodolist(id: string, title: string) {

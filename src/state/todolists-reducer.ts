@@ -49,6 +49,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
             }))
         }
         case 'REMOVE-TODOLIST': {
+            debugger;
             return state.filter(tl => tl.id !== action.id)
         }
         case 'ADD-TODOLIST': {
@@ -98,8 +99,18 @@ export const setTodoListsAC = (todoLists: Array<TodolistType>) => {
     return {type: 'SET_TODO_LISTS', todoLists} as const;
 }
 
-export const fetchTodoListsThunk = (dispatch: Dispatch) => {
-    todolistsAPI.getTodolists().then((response) => {
-        dispatch(setTodoListsAC(response.data));
-    })
+export const fetchTodoListsThunk = () => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.getTodolists().then((response) => {
+            dispatch(setTodoListsAC(response.data));
+        })
+    }
+}
+export const removeTodoListThunk = (id: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.deleteTodolist(id).then((response) => {
+            dispatch(removeTodolistAC(id));
+            console.log(response.status)
+        })
+    }
 }
