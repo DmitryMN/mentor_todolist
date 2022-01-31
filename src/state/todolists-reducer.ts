@@ -110,7 +110,6 @@ export const removeTodoListThunk = (id: string) => {
     return (dispatch: Dispatch) => {
         todolistsAPI.deleteTodolist(id).then((response) => {
             dispatch(removeTodolistAC(id));
-            console.log(response.status)
         })
     }
 }
