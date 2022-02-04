@@ -25,7 +25,7 @@ type PropsType = {
 
 }
 
-export const Todolist = React.memo(function (props: PropsType) {
+const Todolist = React.memo(function (props: PropsType) {
 
     const dispatch = useDispatch();
 
@@ -92,4 +92,4 @@ export const Todolist = React.memo(function (props: PropsType) {
     </div>
 })
 
-
+export default Todolist;
