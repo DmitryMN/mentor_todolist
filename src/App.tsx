@@ -13,14 +13,13 @@ import Paper from '@mui/material/Paper';
 import { Menu } from '@mui/icons-material';
 import {
     addTodolistAC,
+    createTodolistThunk,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValuesType,
-    removeTodolistAC,
     TodolistDomainType,
-    setTodoListsAC,
     fetchTodoListsThunk,
-    removeTodoListThunk
+    removeTodoListThunk,
 } from './state/todolists-reducer'
 import { changeTaskStatusAC, changeTaskTitleAC, removeTaskThunk, createTaskThunk, updateTaskStatusThunk} from './state/tasks-reducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -84,8 +83,10 @@ function App() {
     }, []);
 
     const addTodolist = useCallback((title: string) => {
-        const action = addTodolistAC(title);
-        dispatch(action);
+        // const action = addTodolistAC(title);
+        // dispatch(action);
+        dispatch(createTodolistThunk(title));
+
     }, [dispatch]);
 
     return (

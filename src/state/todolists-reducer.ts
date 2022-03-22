@@ -9,8 +9,9 @@ export type RemoveTodolistActionType = {
 }
 export type AddTodolistActionType = {
     type: 'ADD-TODOLIST',
-    title: string
-    todolistId: string
+    // title: string
+    // todolistId: string
+    newTodoList: TodolistType
 }
 export type ChangeTodolistTitleActionType = {
     type: 'CHANGE-TODOLIST-TITLE',
@@ -54,11 +55,11 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
         }
         case 'ADD-TODOLIST': {
             return [{
-                id: action.todolistId,
-                title: action.title,
+                id: action.newTodoList.id,
+                title: action.newTodoList.title,
                 filter: 'all',
-                addedDate: '',
-                order: 0
+                addedDate: action.newTodoList.addedDate,
+                order: action.newTodoList.order,
             }, ...state]
         }
         case 'CHANGE-TODOLIST-TITLE': {
@@ -85,8 +86,8 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
 export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType => {
     return {type: 'REMOVE-TODOLIST', id: todolistId};
 }
-export const addTodolistAC = (title: string): AddTodolistActionType => {
-    return {type: 'ADD-TODOLIST', title: title, todolistId: v1()};
+export const addTodolistAC = (newTodoList: TodolistType): AddTodolistActionType => {
+    return {type: 'ADD-TODOLIST', newTodoList};
 }
 export const changeTodolistTitleAC = (id: string, title: string): ChangeTodolistTitleActionType => {
     return {type: 'CHANGE-TODOLIST-TITLE', id: id, title: title};
@@ -106,6 +107,18 @@ export const fetchTodoListsThunk = () => {
         })
     }
 }
+
+export const createTodolistThunk = (title: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.createTodolist(title).then((response) => {
+            if(response.data.resultCode === 0) {
+                let newTodoList: TodolistType = response.data.data.item;
+                dispatch(addTodolistAC(newTodoList));
+            }
+        });
+    }
+}
+
 export const removeTodoListThunk = (id: string) => {
     return (dispatch: Dispatch) => {
         todolistsAPI.deleteTodolist(id).then((response) => {
