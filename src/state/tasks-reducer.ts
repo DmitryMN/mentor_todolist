@@ -131,6 +131,11 @@ export const setTasksAC = (tasks: Array<TaskType>, todoListId: string) => {
     return {type: 'SET_TASKS', tasks, todoListId} as const;
 }
 
+export const updateTaskTitleThunk = (taskId: string, title: string, todolistId: string) => {
+    return (dispatch: Dispatch) => {
+    }
+}
+
 export const fetchTasksThunk = (todoListId: string) => {
     return (dispatch: Dispatch) => {
         todolistsAPI.getTasks(todoListId).then((response) => {
