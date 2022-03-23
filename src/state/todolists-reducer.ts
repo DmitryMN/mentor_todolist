@@ -126,3 +126,11 @@ export const removeTodoListThunk = (id: string) => {
         })
     }
 }
+
+export const updateTodoListThunk = (id: string, title: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.updateTodolist(id, title).then((response) => {
+            dispatch(changeTodolistTitleAC(id, title));
+        });
+    }
+}
