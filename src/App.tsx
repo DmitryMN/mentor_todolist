@@ -15,13 +15,12 @@ import {
     updateTodoListThunk,
     createTodolistThunk,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
     FilterValuesType,
     TodolistDomainType,
     fetchTodoListsThunk,
     removeTodoListThunk,
 } from './state/todolists-reducer'
-import { changeTaskStatusAC, changeTaskTitleAC, removeTaskThunk, createTaskThunk, updateTaskStatusThunk, updateTaskTitleThunk} from './state/tasks-reducer';
+import { removeTaskThunk, createTaskThunk, updateTaskThunk, updateTaskTitleThunk} from './state/tasks-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from './state/store';
 import { TaskStatuses, TaskType } from './api/todolists-api'
@@ -59,7 +58,7 @@ function App() {
     const changeStatus = useCallback(function (id: string, status: TaskStatuses, todolistId: string) {
         // const action = changeTaskStatusAC(id, status, todolistId);
         // dispatch(action);
-        dispatch(updateTaskStatusThunk(id, todolistId, status));
+        dispatch(updateTaskThunk(id, todolistId, status));
     }, []);
 
     const changeTaskTitle = useCallback(function (id: string, newTitle: string, todolistId: string) {
