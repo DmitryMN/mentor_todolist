@@ -131,10 +131,6 @@ export const setTasksAC = (tasks: Array<TaskType>, todoListId: string) => {
     return {type: 'SET_TASKS', tasks, todoListId} as const;
 }
 
-export const updateTaskTitleThunk = (taskId: string, title: string, todolistId: string) => {
-    return (dispatch: Dispatch) => {
-    }
-}
 
 export const fetchTasksThunk = (todoListId: string) => {
     return (dispatch: Dispatch) => {
@@ -176,6 +172,26 @@ export const updateTaskStatusThunk = (taskId: string, todolistId: string, status
                 status: status
             }).then((response) => {
                 dispatch(changeTaskStatusAC(taskId, status, todolistId))
+            });
+        }
+    }
+}
+
+export const updateTaskTitleThunk = (taskId: string, updateTitle: string, todolistId: string) => {
+    return (dispatch: Dispatch, getState: () => AppRootStateType) => {
+        const allTaskFromState = getState().tasks;
+        const tasksForCurrentTodolist  = allTaskFromState[todolistId];
+        const task = tasksForCurrentTodolist.find(task => task.id === taskId);
+        if(task) {
+            todolistsAPI.updateTask(todolistId, taskId, {
+                title: updateTitle,
+                startDate: task.startDate,
+                priority: task.priority,
+                description: task.description,
+                deadline: task.deadline,
+                status: task.status,
+            }).then((response) => {
+                dispatch(changeTaskTitleAC(taskId, updateTitle, todolistId));
             });
         }
     }
